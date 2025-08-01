@@ -13,6 +13,8 @@
     <header>
         <!-- Main heading of the web app -->
         <h1>All About Milk</h1>
+        <button id="btnFS">FullScreen</button>
+                <button id="btnWS">Exit Full Screen</button>
         <!-- Navigation menu with clickable links to switch content sections -->
         <nav>
             <ul>
@@ -22,6 +24,7 @@
                 <li><a href="#" onclick="showSection('recipes')">Milk Recipes</a></li>
                 <li><a href="#" onclick="showSection('quiz')">Quiz</a></li>
                 <li><a href="#" onclick="showSection('game')">Game</a></li>
+                
             </ul>
         </nav>
     </header>
@@ -167,7 +170,7 @@
         <!-- Button to reset the entire app/game -->
         <button onclick="resetApp()" style="margin-top: 10px;">Reset App</button>
         <!-- QR code image, presumably for mobile access or sharing -->
-        <img id="qrCodeImg" src="qrcodeimg.png" alt="QR Code">
+        <img id="qrCodeImg" src="images/qrcode.png" alt="QR Code">
         <p>&copy; 2025 All About Milk | Created for DX1215 Web Development A2</p>
     </footer>
 

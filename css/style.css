@@ -340,7 +340,9 @@ footer {
     max-width: 100%;
   }
 
-  #qrCodeImg {
-    display: none;
+  @media (max-width:800px){ /*at mobile size*/
+  #qrCodeImg{display:none;} /*hide QR code */
+  h1{background: lightgreen;}
+  h1::after{content:"(mobile)";}/*append text 'mobile’ */
   }
 }
