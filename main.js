@@ -1,4 +1,6 @@
+/* jshint esversion: 6 */
 // Show/hide sections (navigation)
+
 function showSection(id) {
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
@@ -15,6 +17,7 @@ function showSection(id) {
         selectedSection.classList.add('section');
     }
 }
+
 const moneyAudio = new Audio("audio/Money.mp3");
 // Show default section on page load
 window.onload = () => {
@@ -84,7 +87,7 @@ function startQuiz() {
 }
 
 function showQuestion() {
-    if (currentQuestion < questions.length) {
+    if (currentQuestion <questions.length) {
         document.getElementById("question").textContent = questions[currentQuestion].question;
     }
 }
@@ -97,12 +100,13 @@ function checkAnswer(answer) {
     }
     currentQuestion++;
 
-    if (currentQuestion < questions.length) {
+    if (currentQuestion <questions.length) {
         showQuestion();
-    } else {
+    } 
+    else {
         document.getElementById("quiz-result").textContent = `You scored ${score} out of ${questions.length}.`;
-        document.getElementById("quiz-container").style.display = "none";
-        document.getElementById("startQuizButton").style.display = "block";
+        document.getElementById("quiz-container").style.display = "none" ;
+        document.getElementById("startQuizButton").style.display = "block" ;
 
         setTimeout(() => {
             if (confirm("Do you want to restart the quiz?")) {
@@ -221,7 +225,7 @@ function milkClick() {
     let milkGained = gameState.milkPerClick * gameState.pmilkPerClick;
 
     // Critical hit?
-    if (Math.random() < gameState.critChance) {
+    if (Math.random() <gameState.critChance) {
         milkGained *= 2;
         showMessage('Critical hit! Milk gained doubled.');
     }
@@ -385,9 +389,6 @@ function updateUI() {
         cheeseBonusMultiplier += gameState.cheese * 0.00005; // +0.005% per cheese
     }
 
-    // 👀 Optionally, display the full multiplier somewhere
-    const totalMultiplier = (gameState.milkMultiplier * cheeseBonusMultiplier).toFixed(3);
-
     // Upgrade costs
     const milkPerClickCost = 10 * (gameState.upgrades.milkPerClickLevel + 1);
     const critChanceCost = 15 * (gameState.upgrades.critChanceLevel + 1);
@@ -399,13 +400,13 @@ const cheeseCost = Math.pow(3, gameState.upgrades.milkClickLevel);
     const milkPerClickBtn = document.getElementById('upgradeMilkPerClick');
     milkPerClickBtn.textContent = 
         `Increase Milk per Click (Cost: ${milkPerClickCost} Milk) — Current: ${gameState.milkPerClick}`;
-    milkPerClickBtn.disabled = gameState.milk < milkPerClickCost;
+    milkPerClickBtn.disabled = gameState.milk <milkPerClickCost;
 
     // Crit chance button
     const critChanceBtn = document.getElementById('upgradeCritChance');
     critChanceBtn.textContent = 
         `Increase Critical Hit Chance (Cost: ${critChanceCost} Milk) — Current: ${(gameState.critChance * 100).toFixed(1)}%`;
-    critChanceBtn.disabled = gameState.milk < critChanceCost;
+    critChanceBtn.disabled = gameState.milk <critChanceCost;
 
     // Auto milk button (hide if bought)
     const autoMilkBtn = document.getElementById('upgradeAutoMilk');
@@ -414,32 +415,32 @@ const cheeseCost = Math.pow(3, gameState.upgrades.milkClickLevel);
     } else {
         autoMilkBtn.style.display = 'inline-block';
         autoMilkBtn.textContent = `Unlock Auto Milk Generator (Cost: ${autoMilkCost} Milk)`;
-        autoMilkBtn.disabled = gameState.milk < autoMilkCost;
+        autoMilkBtn.disabled = gameState.milk <autoMilkCost;
     }
 
     // Auto speed button
     const autoSpeedBtn = document.getElementById('upgradeAutoSpeed');
     autoSpeedBtn.textContent = `Increase Auto Generator Speed (Cost: ${autoSpeedCost} Milk)`;
-    autoSpeedBtn.disabled = gameState.upgrades.autoMilkLevel === 0 || gameState.milk < autoSpeedCost;
+    autoSpeedBtn.disabled = gameState.upgrades.autoMilkLevel === 0 || gameState.milk <autoSpeedCost;
 
     // Prestige button
     const prestigeBtn = document.getElementById('prestigeReset');
-    prestigeBtn.disabled = gameState.milk < 1000;
+    prestigeBtn.disabled = gameState.milk <1000;
 
    const milkClickCheeseBtn = document.getElementById('cheeseUpgradeMilkClick');
 const cheesePrestigeBtn = document.getElementById('cheeseUpgradePrestige');
 const milkBonusBtn = document.getElementById('cheeseMilkBonus');
 
     milkClickCheeseBtn.textContent = `Double Milk/Click - Cost: ${cheeseCost} Cheese`;
-    milkClickCheeseBtn.disabled = gameState.cheese < cheeseCost;
+    milkClickCheeseBtn.disabled = gameState.cheese <cheeseCost;
 
 
     cheesePrestigeBtn.textContent = `Boost Prestige Cheese Gain - Cost: ${prestigeBoostCost} Cheese`;
-    cheesePrestigeBtn.disabled = gameState.cheese < prestigeBoostCost;
+    cheesePrestigeBtn.disabled = gameState.cheese <prestigeBoostCost;
 
 
     milkBonusBtn.textContent = `Milk Bonus from Cheese (One-time, 7 Cheese)`;
-    milkBonusBtn.disabled = gameState.cheese < 7 || gameState.cheeseMilkBonus
+    milkBonusBtn.disabled = gameState.cheese <7 || gameState.cheeseMilkBonus;
 
     const finalAppetizerMilkCost = 10000;
     const finalAppetizerCheeseCost = 100;
@@ -457,13 +458,13 @@ const milkBonusBtn = document.getElementById('cheeseMilkBonus');
     // Disable if already bought (true means bought)
     // OR if not enough resources
     finalAppetizerBtn.disabled = gameState.finalUpgrades.appetizer || 
-        gameState.milk < finalAppetizerMilkCost || gameState.cheese < finalAppetizerCheeseCost;
+        gameState.milk < finalAppetizerMilkCost || gameState.cheese <finalAppetizerCheeseCost;
 
     finalMainCourseBtn.disabled = gameState.finalUpgrades.mainCourse || 
-        gameState.milk < finalMainCourseMilkCost || gameState.cheese < finalMainCourseCheeseCost;
+        gameState.milk < finalMainCourseMilkCost || gameState.cheese <finalMainCourseCheeseCost;
 
     finalDessertBtn.disabled = gameState.finalUpgrades.dessert || 
-        gameState.milk < finalDessertMilkCost || gameState.cheese < finalDessertCheeseCost;
+        gameState.milk < finalDessertMilkCost || gameState.cheese <finalDessertCheeseCost;
 }
 function checkPrestigeUnlock() {
     if (!gameState.prestigeUnlocked && gameState.milk >= 1000) {
@@ -473,7 +474,7 @@ function checkPrestigeUnlock() {
 }
 
 function prestigeReset() {
-    if (gameState.milk < 1000) {
+    if (gameState.milk <1000) {
         showMessage('You need at least 1000 Milk to prestige!', 'red');
         return;
     }
@@ -489,7 +490,7 @@ function prestigeReset() {
         // Add cheese to game state
         gameState.cheese += cheeseToAdd;
     gameState.milk = 0;
-     pmilkPerClick = gameState.pmilkPerClick;
+     const pmilkPerClick = gameState.pmilkPerClick;
     gameState.milkPerClick =  1* pmilkPerClick;
     gameState.critChance = 0.05;
     gameState.autoMilkPerSecond = 0;
@@ -502,7 +503,7 @@ function prestigeReset() {
         autoSpeedLevel: 0,
         prestigeCheeseBoostLevel: gameState.upgrades.prestigeCheeseBoostLevel, 
     milkClickLevel: gameState.upgrades.milkClickLevel,
-    }
+    };
 
     gameState.prestigeUnlocked = true; // reset unlock to false, can re-unlock next prestige cycle
     restartAutoMilk();
@@ -520,7 +521,7 @@ function resetApp() {
 
     // Reset Game State
     gameState.milk = 0;
-    gameState.milkPerClick = 1;
+    gameState.milkPerClick = 1 * gameState.pmilkPerClick;
     gameState.critChance = 0.05;
     gameState.autoMilkPerSecond = 0;
     gameState.autoSpeed = 1000;
