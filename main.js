@@ -59,6 +59,7 @@ document.getElementById('startQuizButton').addEventListener('click', startQuiz);
 
 let currentQuestion = 0;
 let score = 0;
+let userAnswers = []; // Array to store the user's answers
 
 const questions = [
     { question: "Is milk a good source of calcium?", answer: "yes" },
@@ -75,11 +76,12 @@ const questions = [
     { question: "Does raw milk pose a higher risk of bacterial contamination?", answer: "yes" },
     { question: "Is milk an effective source of bioavailable calcium?", answer: "yes" },
     { question: "Do all types of plant-based milk contain protein levels comparable to cow’s milk?", answer: "no" }
-    ];
+];
 
 function startQuiz() {
     score = 0;
     currentQuestion = 0;
+    userAnswers = []; // Reset user's answers
     document.getElementById("quiz-container").style.display = "block";
     document.getElementById("startQuizButton").style.display = "none";
     document.getElementById("quiz-result").textContent = "";
@@ -87,7 +89,7 @@ function startQuiz() {
 }
 
 function showQuestion() {
-    if (currentQuestion <questions.length) {
+    if (currentQuestion < questions.length) {
         document.getElementById("question").textContent = questions[currentQuestion].question;
     }
 }
@@ -95,25 +97,43 @@ function showQuestion() {
 function checkAnswer(answer) {
     if (currentQuestion >= questions.length) return; // Ignore if quiz ended
 
+    // Store user's answer
+    userAnswers.push(answer);
+
     if (answer === questions[currentQuestion].answer) {
         score++;
     }
     currentQuestion++;
 
-    if (currentQuestion <questions.length) {
+    if (currentQuestion < questions.length) {
         showQuestion();
-    } 
-    else {
-        document.getElementById("quiz-result").textContent = `You scored ${score} out of ${questions.length}.`;
-        document.getElementById("quiz-container").style.display = "none" ;
-        document.getElementById("startQuizButton").style.display = "block" ;
-
-        setTimeout(() => {
-            if (confirm("Do you want to restart the quiz?")) {
-                startQuiz();
-            }
-        }, 1000);
+    } else {
+        displayResults();
     }
+}
+
+function displayResults() {
+    document.getElementById("quiz-result").textContent = `You scored ${score} out of ${questions.length}.`;
+
+    // Display which questions were correct and which were wrong
+    let resultHTML = "<h3>Results:</h3><ul>";
+    for (let i = 0; i < questions.length; i++) {
+        let result = userAnswers[i] === questions[i].answer ? "Correct" : "Wrong";
+        resultHTML += `<li><strong>Q${i + 1}:</strong> ${questions[i].question}<br>Your answer: ${userAnswers[i]}<br>Result: ${result}</li>`;
+    }
+    resultHTML += "</ul>";
+
+    // Display results
+    document.getElementById("quiz-result").innerHTML += resultHTML;
+
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("startQuizButton").style.display = "block";
+
+    // setTimeout(() => {
+    //     if (confirm("Do you want to restart the quiz?")) {
+    //         startQuiz();
+    //     }
+    // }, 1000);
 }
 
 const gameState = {
