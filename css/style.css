@@ -184,6 +184,10 @@ button:disabled {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.center-container {
+  text-align: center;   /* This centers the text, button, and image inside the container */
+}
+
 #quiz-container {
   margin-top: 20px;
 }

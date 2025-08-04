@@ -184,9 +184,9 @@ function initGame() {
 
     <div class="final-upgrades" style="margin-top: 30px;">
         <h3>Final Course (Endgame)</h3>
-        <button id="finalAppetizer">🧀 Cheese Fondue - Cost: 10,000 Milk, 100 Cheese</button>
-        <button id="finalMainCourse">🥘 Creamy Milk Stew - Cost: 25,000 Milk, 250 Cheese</button>
-        <button id="finalDessert">🍰 Cheesecake Supreme - Cost: 50,000 Milk, 500 Cheese</button>
+        <button id="finalAppetizer"> Cheese Fondue - Cost: 10,000 Milk, 100 Cheese</button>
+        <button id="finalMainCourse"> Creamy Milk Stew - Cost: 25,000 Milk, 250 Cheese</button>
+        <button id="finalDessert"> Cheesecake Supreme - Cost: 50,000 Milk, 500 Cheese</button>
     </div>
 `;
 
@@ -198,11 +198,11 @@ function initGame() {
     document.getElementById('upgradeAutoSpeed').addEventListener('click', buyAutoSpeedUpgrade);
     document.getElementById('prestigeReset').addEventListener('click', prestigeReset);
     document.getElementById('cheeseUpgradeMilkClick').addEventListener('click', buyMilkClickUpgrade);
-document.getElementById('cheeseUpgradePrestige').addEventListener('click', buyCheesePrestigeBoost);
-document.getElementById('cheeseMilkBonus').addEventListener('click', buyMilkBonusFromCheese);
-document.getElementById("finalAppetizer").addEventListener("click", buyFinalAppetizer);
-document.getElementById("finalMainCourse").addEventListener("click", buyFinalMainCourse);
-document.getElementById("finalDessert").addEventListener("click", buyFinalDessert);
+    document.getElementById('cheeseUpgradePrestige').addEventListener('click', buyCheesePrestigeBoost);
+    document.getElementById('cheeseMilkBonus').addEventListener('click', buyMilkBonusFromCheese);
+    document.getElementById("finalAppetizer").addEventListener("click", buyFinalAppetizer);
+    document.getElementById("finalMainCourse").addEventListener("click", buyFinalMainCourse);
+    document.getElementById("finalDessert").addEventListener("click", buyFinalDessert);
 
 
     updateUI();
@@ -525,7 +525,7 @@ function resetApp() {
     gameState.critChance = 0.05;
     gameState.autoMilkPerSecond = 0;
     gameState.autoSpeed = 1000;
-    gameState.cheese = 0; // Reset cheese to 0 on reset
+    gameState.cheese = 0;
     gameState.milkMultiplier = 1;
 
     // Reset upgrades
